@@ -20,7 +20,9 @@ node {
     }
     
     stage('Publish image to Nexus') {
-        withDockerRegistry([credentialsId: nexus_credentials, url: nexusUrl]) {
+        withDockerRegistry([credentialsId: "${nexus_credentials}", url: "${nexusUrl}"])
+         {
+            echo "login ho gaya bhai yea..."
             bat 'docker tag dog-image:latest ${nexusUrl}/dog-image:latest'
             bat 'docker push ${nexusUrl}/dog-image:latest'
             echo "Image published to Nexus repo..."
